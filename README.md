@@ -1,0 +1,2 @@
+# easyrabbitmq
+php-amqplib sdk
