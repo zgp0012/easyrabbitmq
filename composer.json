@@ -1,0 +1,22 @@
+{
+    "name": "zgp0012/easyrabbitmq",
+    "description": "php-amqplib sdk",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "zgp0012",
+            "email": "zgp0012@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php":">=5.6"
+    },
+    "autoload":{
+        "psr-4":{
+            "Mq\\":"src/"
+        }
+    }
+
+}
