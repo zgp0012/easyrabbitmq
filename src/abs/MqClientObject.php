@@ -1,5 +1,5 @@
 <?php
-namespace mq\abs;
+namespace Mq\abs;
 
 use PhpAmqpLib\Connection as MQC;
 use PhpAmqpLib\Exception\AMQPHeartbeatMissedException;

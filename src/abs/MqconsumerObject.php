@@ -1,5 +1,5 @@
 <?php
-namespace mq\abs;
+namespace Mq\abs;
 
 abstract class MqConsumerObject extends MqClientObject
 {

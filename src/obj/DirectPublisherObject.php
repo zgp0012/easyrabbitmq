@@ -1,7 +1,7 @@
 <?php
-namespace mq\obj;
+namespace Mq\obj;
 
-use mq\abs as MA;
+use Mq\abs as MA;
 use PhpAmqpLib\Message as PM;
 
 class DirectPublisherObject extends MA\MqPublisherObject

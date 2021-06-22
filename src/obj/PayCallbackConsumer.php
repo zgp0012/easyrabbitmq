@@ -1,7 +1,7 @@
 <?php
-namespace mq\obj;
+namespace Mq\obj;
 
-use mq\abs\MqConsumerObject;
+use Mq\abs\MqConsumerObject;
 
 class PayCallbackConsumer extends MqConsumerObject
 {
