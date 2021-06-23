@@ -29,7 +29,7 @@ abstract class MqPublisherObject extends MqClientObject
         return $this;
     }
 
-    public abstract function bind();
+    public abstract function init($exchange,$queue,$bind);
 
     public abstract function publish($message, $config = null);
 

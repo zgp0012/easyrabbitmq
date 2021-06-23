@@ -29,11 +29,11 @@ abstract class MqClientObject
     private static function connect(array $config)
     {
         self::$connect = new MQC\AMQPStreamConnection(
-            $config['host'],
-            $config['port'],
-            $config['user'],
-            $config['password'],
-            isset($config['vhost']) && !empty($config['vhost']) ? $config['vhost'] : '/'
+            $config['MQ_HOST'],
+            $config['MQ_PORT'],
+            $config['MQ_USER'],
+            $config['MQ_PWD'],
+            isset($config['MQ_VHOST']) && !empty($config['MQ_VHOST']) ? $config['MQ_VHOST'] : '/'
         );
         self::$lastConnectTime = time();
     }
