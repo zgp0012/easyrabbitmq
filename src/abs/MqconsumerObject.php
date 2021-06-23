@@ -1,10 +1,10 @@
 <?php
+
 namespace Mq\abs;
 
 abstract class MqConsumerObject extends MqClientObject
 {
 
-    public $queue;
 
     private $blocking = true;
 
@@ -13,6 +13,24 @@ abstract class MqConsumerObject extends MqClientObject
     private $ack = false;
 
     private $qosCount = 1;
+
+    public $exchange;
+
+    public $bindKey;
+
+    public $queue;
+
+    public function setExchange($exchange)
+    {
+        $this->exchange = $exchange;
+        return $this;
+    }
+
+    public function setBindKey($bindKey)
+    {
+        $this->bindKey = $bindKey;
+        return $this;
+    }
 
     public function setQueue($queue)
     {
@@ -40,10 +58,12 @@ abstract class MqConsumerObject extends MqClientObject
         $this->blocking = false;
     }
 
+    public abstract function init($exchange, $queue, $bind);
+
     //默认的消费方式
-    public function consume($failClose = false)
+    public function consume($callback)
     {
-        if($this->qos) {
+        if ($this->qos) {
             $this->channel->basic_qos(null, $this->qosCount, null);
         }
         $this->channel->basic_consume(
@@ -53,12 +73,12 @@ abstract class MqConsumerObject extends MqClientObject
             $this->ack,
             false,
             false,
-            [$this, 'call']
+            $callback
         );
 
-        while(count($this->channel->callbacks)) {
+        while (count($this->channel->callbacks)) {
             $this->channel->wait();
-            if(!$this->blocking) {
+            if (!$this->blocking) {
                 $this->channel->close();
             }
         }
@@ -70,7 +90,7 @@ abstract class MqConsumerObject extends MqClientObject
     {
         $message = $event->body;
         $channel = $event->delivery_info['channel'];
-        if($this->run($message)) {
+        if ($this->run($message)) {
             $channel->basic_ack($event->delivery_info['delivery_tag']);
         }
     }
@@ -78,7 +98,7 @@ abstract class MqConsumerObject extends MqClientObject
 
     public function closeChannel()
     {
-        try{
+        try {
             $this->channel->close();
             $this->channel = null;
         } catch (\Exception $ex) {
@@ -90,9 +110,10 @@ abstract class MqConsumerObject extends MqClientObject
     //业务处理
     public abstract function run($message);
 
+
     public function __destruct()
     {
-        if($this->channel != null) {
+        if ($this->channel != null) {
             $this->closeChannel();
         }
     }
