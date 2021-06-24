@@ -7,7 +7,7 @@ use PhpAmqpLib\Message as PM;
 class TopicsPublisherObject extends MA\MqPublisherObject
 {
 
-    public function init()
+    public function init($exchange = "",$queue = "",$bind = "")
     {
         $this->channel->bind_queue($this->queue, $this->exchange, $this->bindKey);
     }

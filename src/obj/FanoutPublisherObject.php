@@ -7,7 +7,7 @@ use PhpAmqpLib\Message as PM;
 class FanoutPublisherObject extends MA\MqPublisherObject
 {
 
-    public function init()
+    public function init($exchange = "",$queue = "",$bind = "")
     {
         $this->channel->queue_bind($this->queue, $this->exchange);
     }
