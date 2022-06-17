@@ -22,7 +22,7 @@ abstract class MqConsumerObject extends MqClientObject
 
     public function setExchange($exchange)
     {
-        $this->exchange = $exchange;
+        $this->exchange =  $exchange;
         return $this;
     }
 
@@ -107,7 +107,7 @@ abstract class MqConsumerObject extends MqClientObject
         return true;
     }
 
-    //业务处理
+    // 业务处理
     public abstract function run($message);
 
 
